@@ -22,7 +22,7 @@ function AccountHome()
 
         const getCourses = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/courses/', { withCredentials: true });
+                const response = await axios.get('https://houseofharmonymusic-api.onrender.com/courses/', { withCredentials: true });
                 console.log("Courses:", response.data);
                 setCourses(response.data);
             } 
@@ -62,7 +62,7 @@ function AccountHome()
                                                     <Card className="course-card h-100 d-flex flex-column" style={{ borderWidth:'3px', borderColor: 'orange', borderStyle: 'solid'}}>
                                                         <Card.Img
                                                             variant="top"
-                                                            src={course.cover_image ? `http://localhost:8000/${course.cover_image}`: "https://via.placeholder.com/150"}
+                                                            src={course.cover_image ? `https://houseofharmonymusic-api.onrender.com/${course.cover_image}`: "https://via.placeholder.com/150"}
                                                             alt="Course"
                                                             className="course-image"
                                                         />

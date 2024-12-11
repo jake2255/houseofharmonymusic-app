@@ -26,7 +26,7 @@ function MassMessaging() {
             const csrfToken = Cookies.get("csrftoken");
             const formData = { subject, body };
             const response = await axios.post(
-                "http://localhost:8000/mass_email_contact/",
+                "https://houseofharmonymusic-api.onrender.com/mass_email_contact/",
                 formData,
                 {
                     headers: { "X-CSRFToken": csrfToken },

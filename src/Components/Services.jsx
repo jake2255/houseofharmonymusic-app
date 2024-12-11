@@ -13,7 +13,7 @@ const Services = () => {
     useEffect(() => {
         const getCourses = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/course_list/');
+                const response = await axios.get('https://houseofharmonymusic-api.onrender.com/course_list/');
                 setCourses(response.data);
             } 
             catch (error) {
@@ -29,7 +29,7 @@ const Services = () => {
         if (courseId) {
             const getSelectedCourse = async () => {
                 try {
-                    const response = await axios.get(`http://localhost:8000/course/${courseId}/`);
+                    const response = await axios.get(`https://houseofharmonymusic-api.onrender.com/course/${courseId}/`);
                     setSelectedCourse(response.data);
                 } 
                 catch (error) {
@@ -68,7 +68,7 @@ const Services = () => {
                                         <Card className="mb-4" style={{ borderWidth: '3px', borderColor: 'orange', borderStyle: 'solid', marginLeft: '15px', marginRight: '15px'  }}>
                                             <Card.Img
                                                 variant="top"
-                                                src={course.cover_image ? `http://localhost:8000/${course.cover_image}`: "https://via.placeholder.com/150"}
+                                                src={course.cover_image ? `https://houseofharmonymusic-api.onrender.com/${course.cover_image}`: "https://via.placeholder.com/150"}
                                                 height="auto"
                                                 style={{ objectFit: 'cover' }}
                                             />

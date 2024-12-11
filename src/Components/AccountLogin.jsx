@@ -16,7 +16,7 @@ function AccountLogin()
     useEffect(() => {
         const getCsrfToken = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/csrf/', { withCredentials: true });
+                const response = await axios.get('https://houseofharmonymusic-api.onrender.com/csrf/', { withCredentials: true });
                 setCsrfToken(response.data.csrfToken);
                 //console.log("CSRF token created:", response.data);
             } 
@@ -42,7 +42,7 @@ function AccountLogin()
         };
   
         try {
-            const response = await axios.post("http://localhost:8000/login/", loginData, tokenData);
+            const response = await axios.post("https://houseofharmonymusic-api.onrender.com/login/", loginData, tokenData);
             console.log("Login successful:", response.data);
             setMessage("Successful login!");
             setError('');

@@ -32,7 +32,7 @@ function AccountSetup()
 
     try{
       // This will now call the VerificationView in the backend to create the verification code
-      const response = await axios.post("http://localhost:8000/verification/", registrationData)
+      const response = await axios.post("https://houseofharmonymusic-api.onrender.com/verification/", registrationData)
       console.log(response.data)
       setMessage("Verification code sent to your email!");
       setError('');

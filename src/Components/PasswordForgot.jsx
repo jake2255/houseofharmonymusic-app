@@ -12,7 +12,7 @@ const PasswordForgot = () => {
         try {
             const csrfToken = Cookies.get("csrftoken");
             const response = await axios.post(
-                'http://localhost:8000/request_password_reset/', 
+                'https://houseofharmonymusic-api.onrender.com/request_password_reset/', 
                 { email },
                 {
                     headers: { "X-CSRFToken": csrfToken },

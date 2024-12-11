@@ -17,7 +17,7 @@ const ServicesCourse = () => {
             try {
                 const csrfToken = Cookies.get("csrftoken");
                 const response = await axios.get(
-                    `http://localhost:8000/services_course/${courseId}/`,
+                    `https://houseofharmonymusic-api.onrender.com/services_course/${courseId}/`,
                     {
                         headers: { "X-CSRFToken": csrfToken },
                         withCredentials: true,
@@ -58,7 +58,7 @@ const ServicesCourse = () => {
 
     const handlePayment = async () => {
         try {
-            const authResponse = await axios.get('http://localhost:8000/check_auth/', { withCredentials: true });
+            const authResponse = await axios.get('https://houseofharmonymusic-api.onrender.com/check_auth/', { withCredentials: true });
             if (!authResponse.data.authenticated) {
                 navigate('/login');
                 return;
@@ -66,7 +66,7 @@ const ServicesCourse = () => {
 
             const csrfToken = Cookies.get("csrftoken");
             const response = await axios.post(
-                "http://localhost:8000/create_checkout_session/",
+                "https://houseofharmonymusic-api.onrender.com/create_checkout_session/",
                 {
                     course_id: courseId,
                 },

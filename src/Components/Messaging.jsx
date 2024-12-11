@@ -31,7 +31,7 @@ function Messaging() {
             const csrfToken = Cookies.get("csrftoken");
 			const formData = { name, email, question };
             await axios.post(
-				"http://localhost:8000/email_contact/", 
+				"https://houseofharmonymusic-api.onrender.com/email_contact/", 
 				formData,
 				{
                     headers: { "X-CSRFToken": csrfToken },

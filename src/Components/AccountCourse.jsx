@@ -20,7 +20,7 @@ const AccountCourse = () => {
 
         const getCourse = async () => {
             try {
-                const response = await axios.get(`http://localhost:8000/account_course/${courseId}/`, { withCredentials: true });
+                const response = await axios.get(`https://houseofharmonymusic-api.onrender.com/account_course/${courseId}/`, { withCredentials: true });
                 console.log(response.data);
                 setCourseData(response.data);
             } 
@@ -39,7 +39,7 @@ const AccountCourse = () => {
             const csrfToken = Cookies.get("csrftoken");
 
             const deleteResponse = await axios.delete(
-                `http://localhost:8000/account_course/${courseId}/`, 
+                `https://houseofharmonymusic-api.onrender.com/account_course/${courseId}/`, 
                 {
                     headers: { "X-CSRFToken": csrfToken },
                     withCredentials: true,

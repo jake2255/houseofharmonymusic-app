@@ -15,7 +15,7 @@ const UsernameReset = () => {
         try {
             const csrfToken = Cookies.get("csrftoken");
             const response = await axios.post(
-                `http://localhost:8000/username_reset/${userId}/${token}/`,
+                `https://houseofharmonymusic-api.onrender.com/username_reset/${userId}/${token}/`,
                 { username },
                 {
                     headers: { "X-CSRFToken": csrfToken },

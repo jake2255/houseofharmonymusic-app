@@ -11,7 +11,7 @@ const Lesson = () => {
     useEffect(() => {
         const getLesson = async () => {
             try {
-                const response = await axios.get(`http://localhost:8000/lesson/${lessonId}/`, { withCredentials: true });
+                const response = await axios.get(`https://houseofharmonymusic-api.onrender.com/lesson/${lessonId}/`, { withCredentials: true });
                 console.log(response.data);
                 setLessonData(response.data);
             } 
@@ -64,7 +64,7 @@ const Lesson = () => {
                                         borderStyle: 'solid'
                                     }}
                                 >
-                                    <source src={`http://localhost:8000/${lessonData.video}`} type="video/mp4" />
+                                    <source src={`https://houseofharmonymusic-api.onrender.com/${lessonData.video}`} type="video/mp4" />
                                     Your browser does not support the video tag.
                                 </video>
                             )}
@@ -74,7 +74,7 @@ const Lesson = () => {
                             { lessonData.image && (
                                 <img
                                     className="lesson-image"
-                                    src={`http://localhost:8000/${lessonData.image}`}
+                                    src={`https://houseofharmonymusic-api.onrender.com/${lessonData.image}`}
                                     alt="Lesson Image"
                                     style={{
                                         width: '60%',

@@ -19,7 +19,7 @@ function AccountLogout()
                     withCredentials: true,
                 };
                 
-                const logoutResponse = await axios.post('http://localhost:8000/logout/', {}, tokenData);
+                const logoutResponse = await axios.post('https://houseofharmonymusic-api.onrender.com/logout/', {}, tokenData);
                 console.log("Logged out:", logoutResponse.data);
                 
                 localStorage.removeItem("userData");

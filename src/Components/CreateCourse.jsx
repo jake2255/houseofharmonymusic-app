@@ -72,7 +72,7 @@ function CreateCourse() {
             const csrfToken = Cookies.get("csrftoken");
 
             const lessonResponse = await axios.post(
-                'http://localhost:8000/lessons/', 
+                'https://houseofharmonymusic-api.onrender.com/lessons/', 
                 lessonData,
                 {
                     headers: { "X-CSRFToken": csrfToken },
@@ -88,7 +88,7 @@ function CreateCourse() {
             });
 
             const courseResponse = await axios.post(
-                'http://localhost:8000/courses/',  
+                'https://houseofharmonymusic-api.onrender.com/courses/',  
                 courseData, 
                 {
                     headers: { "X-CSRFToken": csrfToken },

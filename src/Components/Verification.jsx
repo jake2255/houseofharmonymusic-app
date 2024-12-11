@@ -27,13 +27,13 @@ function Verification(){
       
       try{
         // Takes the user input code, calls the VerificationCheckView to compare the input code vs the randomly generated one
-        const response = await axios.post("http://localhost:8000/verification/check/", { email: data.email, code: code });
+        const response = await axios.post("https://houseofharmonymusic-api.onrender.com/verification/check/", { email: data.email, code: code });
         console.log("Verification code accepted", response.data);
 
         if(response.status == 200){
           // If the code comparison check returns successful, register the account
           try {
-            const registration = await axios.post("http://localhost:8000/register/", data);
+            const registration = await axios.post("https://houseofharmonymusic-api.onrender.com/register/", data);
             console.log("Registration successful:", registration.data);
             navigate('/login');
           }
@@ -55,7 +55,7 @@ function Verification(){
         console.log("You have exceeded the re-send attempts limit. Please register again.")
       }
       try{
-        const createCode = await axios.post("http://localhost:8000/verification/", data);
+        const createCode = await axios.post("https://houseofharmonymusic-api.onrender.com/verification/", data);
         setVerificationAttempts(2);
         setResendAttempts(prev => prev - 1);
         console.log("New verification code created", data.email, `You have ${resendAttempts} re-send attempts available.`);
