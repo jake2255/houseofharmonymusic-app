@@ -13,13 +13,15 @@ function AccountLogout()
                 const csrftoken = Cookies.get("csrftoken");
 
                 console.log("CSRF token before logout:", csrftoken);
-    
-                const tokenData = {
-                    headers: { 'X-CSRFToken': csrftoken },
-                    withCredentials: true,
-                };
                 
-                const logoutResponse = await axios.post('https://houseofharmonymusic-api.onrender.com/logout/', {}, tokenData);
+                const logoutResponse = await axios.post(
+                    'https://houseofharmonymusic-api.onrender.com/logout/', 
+                    {
+                        headers: { 'X-CSRFToken': csrftoken },
+                        withCredentials: true,
+                    },
+                    {}
+                );
                 console.log("Logged out:", logoutResponse.data);
                 
                 localStorage.removeItem("userData");
