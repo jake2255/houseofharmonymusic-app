@@ -16,11 +16,11 @@ function AccountLogout()
                 
                 const logoutResponse = await axios.post(
                     'https://houseofharmonymusic-api.onrender.com/logout/', 
+                    {},
                     {
                         headers: { 'X-CSRFToken': csrftoken },
                         withCredentials: true,
                     },
-                    {}
                 );
                 console.log("Logged out:", logoutResponse.data);
                 
