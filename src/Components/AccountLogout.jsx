@@ -5,37 +5,29 @@ import Cookies from "js-cookie";
 
 function AccountLogout() 
 {
+    const [csrfToken, setCsrfToken] = useState('');
     const navigate = useNavigate();
 
-    function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-
     useEffect(() => {
+        const getCsrfToken = async () => {
+            try {
+                const response = await axios.get('https://houseofharmonymusic-api.onrender.com/csrf/', { withCredentials: true });
+                setCsrfToken(response.data.csrfToken);
+            } 
+            catch(error) {
+                console.error("Error fetching CSRF token:", error);
+            }
+        };
+
         const logout = async () => {
             try {
                 //const csrftoken = Cookies.get("csrftoken");
-                console.log("CSRF token before logout:", getCookie('csrftoken'));
-                console.log("CSRF token before logout:", Cookies.get("csrftoken"));
-
-                
+                console.log("CSRF token before logout:", csrfToken);
                 const logoutResponse = await axios.post(
                     'https://houseofharmonymusic-api.onrender.com/logout/', 
                     {},
                     {
-                        headers: { 'X-CSRFToken': getCookie('csrftoken') },
+                        headers: { 'X-CSRFToken': csrfToken },
                         withCredentials: true,
                     },
                 );
@@ -51,8 +43,13 @@ function AccountLogout()
             }
         };
     
-        logout();
-    }, [navigate]);
+        const handleLogout = async () => {
+            await getCsrfToken();
+            await logout();
+        };
+
+        handleLogout();
+    }, [csrfToken, navigate]);
 
     return null;
 }
