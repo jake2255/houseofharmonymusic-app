@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Card, Alert } from 'react-bootstrap';
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -11,10 +11,25 @@ function CreateCourse() {
     const [courseCoverImage, setCourseCoverImage] = useState(null);
     const [message, setMessage] = useState("");
     const [showAlert, setShowAlert] = useState(false);
+    const [csrfToken, setCsrfToken] = useState('');
 
     const [lessons, setLessons] = useState([
         { title: "", overview: "", description: "", video: null, image: null }
     ]);
+
+    useEffect(() => {
+        const getCsrfToken = async () => {
+            try {
+                const response = await axios.get('https://houseofharmonymusic-api.onrender.com/csrf/', { withCredentials: true });
+                setCsrfToken(response.data.csrfToken);
+            } 
+            catch(error) {
+                console.error("Error fetching CSRF token:", error);
+            }
+        };
+
+        getCsrfToken();
+    }, []);
 
     const handleLessonChange = (index, field, value) => {
         const allLessons = [...lessons];
@@ -69,8 +84,7 @@ function CreateCourse() {
         });
 
         try {
-            const csrfToken = Cookies.get("csrftoken");
-
+            //const csrfToken = Cookies.get("csrftoken");
             const lessonResponse = await axios.post(
                 'https://houseofharmonymusic-api.onrender.com/lessons/', 
                 lessonData,
