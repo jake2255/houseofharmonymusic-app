@@ -64,7 +64,7 @@ const Lesson = () => {
                                         borderStyle: 'solid'
                                     }}
                                 >
-                                    <source src={`https://houseofharmonymusic-api.onrender.com/${lessonData.video}`} type="video/mp4" />
+                                    <source src={`https://houseofharmonymusic-api.onrender.com/media/${lessonData.video}`} type="video/mp4" />
                                     Your browser does not support the video tag.
                                 </video>
                             )}
@@ -74,7 +74,7 @@ const Lesson = () => {
                             { lessonData.image && (
                                 <img
                                     className="lesson-image"
-                                    src={`https://houseofharmonymusic-api.onrender.com/${lessonData.image}`}
+                                    src={`https://houseofharmonymusic-api.onrender.com/media/${lessonData.image}`}
                                     alt="Lesson Image"
                                     style={{
                                         width: '60%',

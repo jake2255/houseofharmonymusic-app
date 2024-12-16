@@ -62,7 +62,7 @@ function AccountHome()
                                                     <Card className="course-card h-100 d-flex flex-column" style={{ borderWidth:'3px', borderColor: 'orange', borderStyle: 'solid'}}>
                                                         <Card.Img
                                                             variant="top"
-                                                            src={course.cover_image ? `https://houseofharmonymusic-api.onrender.com/${course.cover_image}`: "https://via.placeholder.com/150"}
+                                                            src={course.cover_image ? `https://houseofharmonymusic-api.onrender.com/media/${course.cover_image}`: "https://via.placeholder.com/150"}
                                                             alt="Course"
                                                             className="course-image"
                                                         />
