@@ -68,7 +68,7 @@ const Services = () => {
                                         <Card className="mb-4" style={{ borderWidth: '3px', borderColor: 'orange', borderStyle: 'solid', marginLeft: '15px', marginRight: '15px'  }}>
                                             <Card.Img
                                                 variant="top"
-                                                src={course.cover_image ? `https://houseofharmonymusic-api.onrender.com/media/${course.cover_image}`: "https://via.placeholder.com/150"}
+                                                src={course.cover_image ? `https://houseofharmonymusic-api.onrender.com/media${course.cover_image}`: "https://via.placeholder.com/150"}
                                                 height="auto"
                                                 style={{ objectFit: 'cover' }}
                                             />
