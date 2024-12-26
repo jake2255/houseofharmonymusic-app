@@ -11,7 +11,7 @@ function AccountHome()
     const [isAuthorized, setIsAuthorized] = useState(
         localStorage.getItem("isAuthorized") === "true"
     );
-    const S3_BASE_URL = "https://houseofharmonymusic-bucket.s3.amazonaws.com/media"
+    const S3_BASE_URL = "https://houseofharmonymusic-bucket.s3.amazonaws.com"
     
     const userData = localStorage.getItem("userData");
     const user = userData ? JSON.parse(userData) : null;

@@ -7,7 +7,7 @@ import './Lesson.css';
 const Lesson = () => {
     const { lessonId, courseId } = useParams();
     const [lessonData, setLessonData] = useState(null);
-    const S3_BASE_URL = "https://houseofharmonymusic-bucket.s3.amazonaws.com/media"
+    const S3_BASE_URL = "https://houseofharmonymusic-bucket.s3.amazonaws.com"
 
     useEffect(() => {
         const getLesson = async () => {
