@@ -7,6 +7,7 @@ import './Lesson.css';
 const Lesson = () => {
     const { lessonId, courseId } = useParams();
     const [lessonData, setLessonData] = useState(null);
+    const S3_BASE_URL = "https://houseofharmonymusic-bucket.s3.amazonaws.com/media"
 
     useEffect(() => {
         const getLesson = async () => {
@@ -64,7 +65,7 @@ const Lesson = () => {
                                         borderStyle: 'solid'
                                     }}
                                 >
-                                    <source src={`https://houseofharmonymusic-api.onrender.com/media${lessonData.video}`} type="video/mp4" />
+                                    <source src={`${S3_BASE_URL}/${lessonData.video}`} type="video/mp4" />
                                     Your browser does not support the video tag.
                                 </video>
                             )}
@@ -74,7 +75,7 @@ const Lesson = () => {
                             { lessonData.image && (
                                 <img
                                     className="lesson-image"
-                                    src={`https://houseofharmonymusic-api.onrender.com/media${lessonData.image}`}
+                                    src={`${S3_BASE_URL}/${lessonData.image}`}
                                     alt="Lesson Image"
                                     style={{
                                         width: '60%',
