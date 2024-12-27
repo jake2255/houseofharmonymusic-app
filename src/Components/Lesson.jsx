@@ -51,7 +51,7 @@ const Lesson = () => {
 
                     <Row className="d-flex flex-column align-items-center">
                         <Col className="mb-5 py-2 d-flex justify-content-center" style={{ width: '100%' }}>
-                            { lessonData.video_url && (
+                            { lessonData.video && (
                                 <video 
                                     className="lesson-video"
                                     controls
@@ -64,17 +64,17 @@ const Lesson = () => {
                                         borderStyle: 'solid'
                                     }}
                                 >
-                                    <source src={lessonData.video_url} type="video/mp4" />
+                                    <source src={lessonData.video} type="video/mp4" />
                                     Your browser does not support the video tag.
                                 </video>
                             )}
                         </Col>
                             
                         <Col className="mb-3 d-flex justify-content-center" style={{ width: '100%' }}>
-                            { lessonData.image_url && (
+                            { lessonData.image && (
                                 <img
                                     className="lesson-image"
-                                    src={lessonData.image_url}
+                                    src={lessonData.image}
                                     alt="Lesson Image"
                                     style={{
                                         width: '60%',
