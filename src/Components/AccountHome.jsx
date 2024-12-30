@@ -38,12 +38,12 @@ function AccountHome()
         <Container className="py-5">
             <Row className="mb-4">
                 <Col>
-                    <Card className="p-4 shadow-sm account-home-card" style={{ borderWidth: '3px', borderColor: 'orange', borderStyle: 'solid'}}>
+                    <Card className="p-4 shadow-sm mx-auto" style={{ borderWidth: '3px', borderColor: 'orange', borderStyle: 'solid', maxWidth: '1200px'}}>
                         <Card.Body>
                             <Card.Title as="h1" className="d-flex justify-content-center" style={{ color: 'orange' }}>
                                 Welcome, {user ? user.user_info.username : "Guest"}
                             </Card.Title>
-                            <Card.Text  className="d-flex justify-content-center">
+                            <Card.Text className="d-flex justify-content-center" style={{ width: '1000px', margin: '0 auto' }}>
                                 Let's get started on your musical journey!
                             </Card.Text>
                         </Card.Body>
@@ -55,14 +55,14 @@ function AccountHome()
                         >
                             <Tab eventKey="courses" title="Courses">
                                 <Container>
-                                    <Row className="g-4">
+                                    <Row className="g-4" style={{ width: '100%', maxWidth: '1000px', margin: '0 auto' }}>
                                         {courses.length > 0 ? (
                                             courses.map((course, index) => (
                                                 <Col md={4} key={index}>
                                                     <Card className="course-card h-100 d-flex flex-column" style={{ borderWidth:'3px', borderColor: 'orange', borderStyle: 'solid'}}>
                                                         <Card.Img
                                                             variant="top"
-                                                            src={course.cover_image ? course.cover_image : "https://via.placeholder.com/150"}
+                                                            src={course.cover_image ? `http://localhost:8000/${course.cover_image}`: "https://via.placeholder.com/150"}
                                                             alt="Course"
                                                             className="course-image"
                                                         />

@@ -49,10 +49,10 @@ const Services = () => {
         <Container className="py-5">
             <Row className="mb-4">
                 <Col>
-                    <Card className="p-4 shadow-sm" style={{ borderWidth: '3px', borderColor: 'orange', borderStyle: 'solid'}}>
+                    <Card className="p-4 shadow-sm mx-auto" style={{ borderWidth: '3px', borderColor: 'orange', borderStyle: 'solid', maxWidth: '1200px'}}>
                         <Card.Body>
                             <Card.Title as="h1" className="d-flex justify-content-center" style={{ color: 'orange' }}>Courses</Card.Title>
-                            <Card.Text className="text-start" style={{ width: '100%', maxWidth: '870px', margin: '0 auto' }}>
+                            <Card.Text className="text-start" style={{ width: '100%', maxWidth: '1000px', margin: '0 auto' }}>
                                 Embark on a musical adventure with our comprehensive online courses in guitar, piano, 
                                 and vocal training. Whether you aspire to strum the perfect chord, play enchanting melodies, 
                                 or find your unique voice, our courses are crafted to guide you every step of the way. Join 
@@ -61,24 +61,23 @@ const Services = () => {
                             </Card.Text>
                         </Card.Body>
 
-                        <Row className="d-flex justify-content-center">
+                        <Row className="" style={{ width: '100%', maxWidth: '1025px', margin: '0 auto' }}>
                             {courses.length > 0 ? (
                                 courses.map((course) => (
-                                    <Col xs={12} sm={6} md={3} lg={10} key={course.id}>
-                                        <Card className="mb-4" style={{ borderWidth: '3px', borderColor: 'orange', borderStyle: 'solid', marginLeft: '15px', marginRight: '15px'  }}>
+                                    <Col md={4} key={course.id} className="mb-4">
+                                        <Card className="h-100 d-flex flex-column" style={{ borderWidth: '3px', borderColor: 'orange', borderStyle: 'solid' }}>
                                             <Card.Img
                                                 variant="top"
-                                                src={course.cover_image ? course.cover_image : "https://via.placeholder.com/150"}
-                                                height="auto"
-                                                style={{ objectFit: 'cover' }}
+                                                src={course.cover_image ? `http://localhost:8000/${course.cover_image}` : "https://via.placeholder.com/150"}
+                                                style={{ height: '200px', objectFit: 'cover' }}
                                             />
-                                            <Card.Body>
+                                            <Card.Body className="d-flex flex-column">
                                                 <Card.Title className="d-flex justify-content-center" style={{ color: 'orange' }}>{course.title}</Card.Title>
                                                 <Card.Text>{course.overview}</Card.Text>
-                                                <div className="d-flex justify-content-center">
-                                                <Link to={`/course-list/course/${course.id}`}>
-                                                    <Button variant="primary">View Course</Button>
-                                                </Link>
+                                                <div className="d-flex justify-content-center mt-auto">
+                                                    <Link to={`/course-list/course/${course.id}`}>
+                                                        <Button variant="primary">View Course</Button>
+                                                    </Link>
                                                 </div>
                                             </Card.Body>
                                         </Card>
@@ -94,7 +93,6 @@ const Services = () => {
                 </Col>
             </Row>
         </Container>
-        
     );
 };
 
