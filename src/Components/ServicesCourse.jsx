@@ -105,7 +105,7 @@ const ServicesCourse = () => {
             )}
             <Row className="mb-4">
                 <Col>
-                    <Card className="p-4 shadow-sm" style={{ borderWidth: '3px', borderColor: 'orange', borderStyle: 'solid'}}>
+                    <Card className="p-4 shadow-sm" style={{ borderWidth: '3px', borderColor: 'orange', borderStyle: 'solid', width: '1200px'}}>
                         <Card.Body>
                             <Card.Title as="h1" className="d-flex justify-content-center" style={{ color: 'orange' }}>{courseData.course.title}</Card.Title>
                             <Card.Text>{courseData.course.description}</Card.Text>

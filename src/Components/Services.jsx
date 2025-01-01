@@ -46,13 +46,13 @@ const Services = () => {
     }
 
     return (
-        <Container className="py-5">
+        <Container className="py-5" fluid>
             <Row className="mb-4">
                 <Col>
-                    <Card className="p-4 shadow-sm mx-auto" style={{ borderWidth: '3px', borderColor: 'orange', borderStyle: 'solid', maxWidth: '1200px'}}>
+                    <Card className="p-4 shadow-sm mx-auto" style={{ borderWidth: '3px', borderColor: 'orange', borderStyle: 'solid', maxWidth: '95%'}}>
                         <Card.Body>
                             <Card.Title as="h1" className="d-flex justify-content-center" style={{ color: 'orange' }}>Courses</Card.Title>
-                            <Card.Text className="text-start" style={{ width: '100%', maxWidth: '1000px', margin: '0 auto' }}>
+                            <Card.Text className="text-start" style={{ width: '100%', margin: '0 auto' }}>
                                 Embark on a musical adventure with our comprehensive online courses in guitar, piano, 
                                 and vocal training. Whether you aspire to strum the perfect chord, play enchanting melodies, 
                                 or find your unique voice, our courses are crafted to guide you every step of the way. Join 
@@ -61,7 +61,7 @@ const Services = () => {
                             </Card.Text>
                         </Card.Body>
 
-                        <Row className="" style={{ width: '100%', maxWidth: '1025px', margin: '0 auto' }}>
+                        <Row className="" style={{ width: '100%', margin: '0 auto' }}>
                             {courses.length > 0 ? (
                                 courses.map((course) => (
                                     <Col md={4} key={course.id} className="mb-4">

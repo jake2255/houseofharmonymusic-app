@@ -35,15 +35,15 @@ function AccountHome()
     }, []);
 
     return (
-        <Container className="py-5">
+        <Container className="py-5" fluid>
             <Row className="mb-4">
                 <Col>
-                    <Card className="p-4 shadow-sm mx-auto" style={{ borderWidth: '3px', borderColor: 'orange', borderStyle: 'solid', maxWidth: '1200px'}}>
+                    <Card className="p-4 shadow-sm mx-auto" style={{ borderWidth: '3px', borderColor: 'orange', borderStyle: 'solid', maxWidth: '95%'}}>
                         <Card.Body>
                             <Card.Title as="h1" className="d-flex justify-content-center" style={{ color: 'orange' }}>
                                 Welcome, {user ? user.user_info.username : "Guest"}
                             </Card.Title>
-                            <Card.Text className="d-flex justify-content-center" style={{ width: '1000px', margin: '0 auto' }}>
+                            <Card.Text className="d-flex justify-content-center" style={{ width: '100%', margin: '0 auto' }}>
                                 Let's get started on your musical journey!
                             </Card.Text>
                         </Card.Body>

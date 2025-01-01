@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { Container, Row, Col, Card, Accordion, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, Accordion, Button, Modal } from 'react-bootstrap';
 import axios from 'axios';
 import Cookies from "js-cookie";
 import './AccountCourse.css';
@@ -8,6 +8,7 @@ import './AccountCourse.css';
 const AccountCourse = () => {
     const { courseId } = useParams();
     const [courseData, setCourseData] = useState(null);
+    const [deleteCourse, setDeleteCourse] = useState(false);
     const [isAuthorized, setIsAuthorized] = useState(
         localStorage.getItem("isAuthorized") === "true"
     );
@@ -37,7 +38,6 @@ const AccountCourse = () => {
 
         try {
             const csrfToken = Cookies.get("csrftoken");
-
             const deleteResponse = await axios.delete(
                 `https://houseofharmonymusic-api.onrender.com/account_course/${courseId}/`, 
                 {
@@ -47,12 +47,17 @@ const AccountCourse = () => {
             );
 
             console.log(deleteResponse.data);
+            setDeleteCourse(false);
             navigate("/account");
         } 
         catch (error) {
             console.error("Error deleting course:", error);
         }
     };
+
+    const handleDeleteClick = () => {
+        setDeleteCourse(true);
+    }; 
 
     if(!courseData) {
         return <div>Loading...</div>;
@@ -62,7 +67,7 @@ const AccountCourse = () => {
         <Container className="py-5">
             <Row className="mb-4">
                 <Col>
-                    <Card className="p-4 shadow-sm " style={{ borderWidth: '3px', borderColor: 'orange', borderStyle: 'solid'}}>
+                    <Card className="p-4 shadow-sm " style={{ borderWidth: '3px', borderColor: 'orange', borderStyle: 'solid', width: '1200px'}}>
                         <Row className="mb-3 align-items-center">
                             <Col className="d-flex justify-content-start">
                                 <Link to={'/account'}>
@@ -74,13 +79,12 @@ const AccountCourse = () => {
 
                             {isAuthorized && (
                                 <Col className="d-flex justify-content-end">
-                                    <Button className="mb-0" variant="danger" onClick={handleDeleteCourse}>
+                                    <Button className="mb-0" variant="danger" onClick={handleDeleteClick}>
                                         Delete Course
                                     </Button>
                                 </Col>
                             )}
                         </Row>
-
 
                         <Card.Body>
                             <Card.Title as="h1" className="d-flex justify-content-center" style={{ color: 'orange' }}>{courseData.course.title}</Card.Title>
@@ -114,6 +118,23 @@ const AccountCourse = () => {
                     </Card>         
                 </Col>
             </Row>
+
+            <Modal show={deleteCourse} onHide={() => setDeleteCourse(true)}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Confirm Deletion</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    Are you sure you want to delete this course? All linked lessons will also be deleted. This action cannot be undone.
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setDeleteCourse(false)}>
+                        Cancel
+                    </Button>
+                    <Button variant="danger" onClick={handleDeleteCourse}>
+                        Yes, Delete
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </Container>      
     );
 };

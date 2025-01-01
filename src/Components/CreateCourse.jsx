@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Form, Button, Card, Alert } from 'react-bootstrap';
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -12,6 +13,7 @@ function CreateCourse() {
     const [message, setMessage] = useState("");
     const [showAlert, setShowAlert] = useState(false);
     const [csrfToken, setCsrfToken] = useState('');
+    const navigate = useNavigate();
 
     const [lessons, setLessons] = useState([
         { title: "", overview: "", description: "", video: null, image: null }
@@ -115,15 +117,8 @@ function CreateCourse() {
             setShowAlert(true);
             setTimeout(() => {
                 setShowAlert(false);
+                navigate("/account");
             }, 3000);
-
-            // setCourseTitle("");
-            // setCourseOverview("");
-            // setCourseDescription("");
-            // setCoursePrice("");
-            // setCourseCoverImage(null);
-            // setLessons([]);
-            // addLesson();
         } 
         catch(error) {
             console.error("Error creating lessons or course:", error);
@@ -132,17 +127,13 @@ function CreateCourse() {
     };
 
     return (
-        <Container className="p-4 mx-auto" style={{ maxWidth: '1000px' }} fluid>
+        <Container className="p-5 mx-auto" style={{ maxWidth: '1000px' }} fluid>
             {showAlert && message && (
                 <Alert variant={message.includes("successfully") ? "success" : "danger"}>
                     {message}
                 </Alert>
             )}
-            <Row className="mb-4">
-                <Col>
-                    <h1 style={{fontWeight: 'bold'}}>Create New Course</h1>
-                </Col>
-            </Row>
+
             <Form onSubmit={handleSubmit}>
                 <Card className="mb-4" style={{ width: '100%', borderWidth: '3px', borderColor: 'orange', borderStyle: 'solid'}}>
                     <Card.Body>
