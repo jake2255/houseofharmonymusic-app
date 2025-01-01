@@ -13,8 +13,8 @@ export default function Home() {
             </div>
             <Container>
                 <Row className="justify-content-center">
-                    <Col xs={12} md={10} >
-                        <div className="About" style={{ borderWidth: '3px', borderColor: 'orange', borderStyle: 'solid'}}>
+                    <Col>
+                        <div className="About" style={{ borderWidth: '3px', borderColor: 'orange', borderStyle: 'solid', width: '100%'}}>
                             <h2 >Learn to play music with House of Harmony Music</h2>
                             <p>
                                 House of Harmony Music offers personalized instruction from the multi-instrumentalist, Brandon Shadman. 
