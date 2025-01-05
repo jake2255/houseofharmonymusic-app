@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card, Accordion, Button, Alert } from 'react-bootstrap';
 import './ServicesCourse.css';
-import '../api.js';
+import api from '../api.js';
 
 const ServicesCourse = () => {
     const { courseId } = useParams();
@@ -19,7 +19,7 @@ const ServicesCourse = () => {
                 setCourseData(response.data);
             } 
             catch (error) {
-                console.error(error.data);
+                console.error(error);
             }
         };
 
@@ -70,7 +70,7 @@ const ServicesCourse = () => {
             }
         } 
         catch (error) {
-            console.error(error.data);
+            console.error(error);
         }
     };
 
