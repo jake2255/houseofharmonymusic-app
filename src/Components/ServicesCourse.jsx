@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card, Accordion, Button, Alert } from 'react-bootstrap';
-import axios from 'axios';
-import Cookies from "js-cookie";
 import './ServicesCourse.css';
+import '../api.js';
 
 const ServicesCourse = () => {
     const { courseId } = useParams();
@@ -15,19 +14,12 @@ const ServicesCourse = () => {
     useEffect(() => {
         const getCourse = async () => {
             try {
-                const csrfToken = Cookies.get("csrftoken");
-                const response = await axios.get(
-                    `https://houseofharmonymusic-api.onrender.com/services_course/${courseId}/`,
-                    {
-                        headers: { "X-CSRFToken": csrfToken },
-                        withCredentials: true,
-                    },
-                );
+                const response = await api.get(`/services_course/${courseId}/`);
                 console.log(response.data);
                 setCourseData(response.data);
             } 
             catch (error) {
-                console.error("Error fetching course", error);
+                console.error(error.data);
             }
         };
 
@@ -58,23 +50,13 @@ const ServicesCourse = () => {
 
     const handlePayment = async () => {
         try {
-            const authResponse = await axios.get('https://houseofharmonymusic-api.onrender.com/check_auth/', { withCredentials: true });
+            const authResponse = await api.get('/check_auth/');
             if (!authResponse.data.authenticated) {
                 navigate('/login');
                 return;
             }
 
-            const csrfToken = Cookies.get("csrftoken");
-            const response = await axios.post(
-                "https://houseofharmonymusic-api.onrender.com/create_checkout_session/",
-                {
-                    course_id: courseId,
-                },
-                {
-                    headers: { "X-CSRFToken": csrfToken },
-                    withCredentials: true,
-                },
-            );
+            const response = await api.post("/create_checkout_session/", {course_id: courseId});
 
             if (response.data.checkout_url) {
                 // Redirect user to Stripe Checkout
@@ -88,7 +70,7 @@ const ServicesCourse = () => {
             }
         } 
         catch (error) {
-            console.error("Error during checkout session creation:", error);
+            console.error(error.data);
         }
     };
 
