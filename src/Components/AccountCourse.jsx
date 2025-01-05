@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card, Accordion, Button, Modal } from 'react-bootstrap';
-import axios from 'axios';
-import Cookies from "js-cookie";
+import api from '../api.js';
 import './AccountCourse.css';
 
 const AccountCourse = () => {
@@ -21,12 +20,12 @@ const AccountCourse = () => {
 
         const getCourse = async () => {
             try {
-                const response = await axios.get(`https://houseofharmonymusic-api.onrender.com/account_course/${courseId}/`, { withCredentials: true });
+                const response = await api.get(`/account_course/${courseId}/`);
                 console.log(response.data);
                 setCourseData(response.data);
             } 
             catch (error) {
-                console.error("Error fetching course", error);
+                console.error(error);
             }
         };
 
@@ -37,21 +36,13 @@ const AccountCourse = () => {
         e.preventDefault();
 
         try {
-            const csrfToken = Cookies.get("csrftoken");
-            const deleteResponse = await axios.delete(
-                `https://houseofharmonymusic-api.onrender.com/account_course/${courseId}/`, 
-                {
-                    headers: { "X-CSRFToken": csrfToken },
-                    withCredentials: true,
-                },
-            );
-
+            const deleteResponse = await api.delete(`/account_course/${courseId}/`);
             console.log(deleteResponse.data);
             setDeleteCourse(false);
             navigate("/account");
         } 
         catch (error) {
-            console.error("Error deleting course:", error);
+            console.error(error);
         }
     };
 

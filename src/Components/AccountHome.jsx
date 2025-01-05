@@ -1,7 +1,7 @@
-import { useLocation, useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Tabs, Tab, Container, Row, Col, Card, Button } from 'react-bootstrap';
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import api from '../api.js';
 import './AccountHome.css';
 
 function AccountHome() 
@@ -22,12 +22,12 @@ function AccountHome()
 
         const getCourses = async () => {
             try {
-                const response = await axios.get('https://houseofharmonymusic-api.onrender.com/courses/', { withCredentials: true });
-                console.log("Courses:", response.data);
+                const response = await api.get('/courses/');
+                console.log(response.data);
                 setCourses(response.data);
             } 
             catch(error) {
-                console.error("Error fetching courses:", error);
+                console.error(error);
             }
         };
 

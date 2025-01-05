@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Container, Card, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api.js';
 import './AccountLogin.css';
 
 function AccountLogin() 
@@ -16,12 +16,12 @@ function AccountLogin()
     useEffect(() => {
         const getCsrfToken = async () => {
             try {
-                const response = await axios.get('https://houseofharmonymusic-api.onrender.com/csrf/', { withCredentials: true });
+                const response = await api.get('/csrf/');
                 setCsrfToken(response.data.csrfToken);
-                //console.log("CSRF token created:", response.data);
+                console.log(response.data);
             } 
-            catch(error) {
-                console.error("Error fetching CSRF token:", error);
+            catch (error) {
+                console.error(error);
             }
         };
 
@@ -35,15 +35,10 @@ function AccountLogin()
             username: username,
             password: password,
         };
-
-        const tokenData = {
-            headers: { 'X-CSRFToken': csrfToken },
-            withCredentials: true,
-        };
   
         try {
-            const response = await axios.post("https://houseofharmonymusic-api.onrender.com/login/", loginData, tokenData);
-            console.log("Login successful:", response.data);
+            const response = await api.post("/login/", loginData);
+            console.log(response.data);
             setMessage("Successful login!");
             setError('');
             

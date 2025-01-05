@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Form, Button, Card, Alert } from 'react-bootstrap';
-import axios from "axios";
-import Cookies from "js-cookie";
+import api from '../api.js';
 
 function CreateCourse() {
     const [courseTitle, setCourseTitle] = useState("");
@@ -19,19 +18,20 @@ function CreateCourse() {
         { title: "", overview: "", description: "", video: null, image: null }
     ]);
 
-    useEffect(() => {
-        const getCsrfToken = async () => {
-            try {
-                const response = await axios.get('https://houseofharmonymusic-api.onrender.com/csrf/', { withCredentials: true });
-                setCsrfToken(response.data.csrfToken);
-            } 
-            catch(error) {
-                console.error("Error fetching CSRF token:", error);
-            }
-        };
+    // useEffect(() => {
+    //     const getCsrfToken = async () => {
+    //         try {
+    //             const response = await api.get('/csrf/');
+    //             console.log(response.data);
+    //             setCsrfToken(response.data.csrfToken);
+    //         } 
+    //         catch(error) {
+    //             console.error(error);
+    //         }
+    //     };
 
-        getCsrfToken();
-    }, []);
+    //     getCsrfToken();
+    // }, []);
 
     const handleLessonChange = (index, field, value) => {
         const allLessons = [...lessons];
@@ -86,42 +86,26 @@ function CreateCourse() {
         });
 
         try {
-            //const csrfToken = Cookies.get("csrftoken");
-            const lessonResponse = await axios.post(
-                'https://houseofharmonymusic-api.onrender.com/lessons/', 
-                lessonData,
-                {
-                    headers: { "X-CSRFToken": csrfToken },
-                    withCredentials: true,
-                },
-            );
-
-            console.log("Successfully created lessons:", lessonResponse.data);
+            const lessonResponse = await api.post('/lessons/', lessonData);
+            console.log(lessonResponse.data);
 
             const lessonIds = lessonResponse.data.lesson_ids;
             lessonIds.forEach((id) => {
                 courseData.append("lessonIds", id);
             });
 
-            const courseResponse = await axios.post(
-                'https://houseofharmonymusic-api.onrender.com/courses/',  
-                courseData, 
-                {
-                    headers: { "X-CSRFToken": csrfToken },
-                    withCredentials: true,
-                },
-            );
+            const courseResponse = await api.post('/courses/', courseData);
+            console.log(courseResponse.data);
 
-            console.log("Successfully created course:", courseResponse.data);
             setMessage("Course successfully created!");
             setShowAlert(true);
             setTimeout(() => {
                 setShowAlert(false);
                 navigate("/account");
-            }, 3000);
+            }, 2000);
         } 
         catch(error) {
-            console.error("Error creating lessons or course:", error);
+            console.error(error);
             setMessage("Error creating course. Try again.");
         }
     };

@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col, Alert, Card } from "react-bootstrap";
-import axios from 'axios';
-import Cookies from "js-cookie";
+import api from '../api.js';
 import './Messaging.css';
 
 function Messaging() {
@@ -28,24 +27,17 @@ function Messaging() {
         e.preventDefault();
 
         try {
-            const csrfToken = Cookies.get("csrftoken");
 			const formData = { name, email, question };
-            await axios.post(
-				"https://houseofharmonymusic-api.onrender.com/email_contact/", 
-				formData,
-				{
-                    headers: { "X-CSRFToken": csrfToken },
-                    withCredentials: false,
-                }
-			);
+            const response = await api.post("/email_contact/", formData);
+            console.log(response.data)
 
 			setMessage("Question successfully submitted. Check your email inbox for a response.")
 			setName('');
 			setEmail('');
 			setQuestion('');
         } 
-		catch (err) {
-            console.error(err);
+		catch (error) {
+            console.error(error);
             setMessage("Error submitting the question. Try again later.");
         }
 

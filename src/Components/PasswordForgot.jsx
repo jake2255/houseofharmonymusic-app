@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap';
-import axios from 'axios';
-import Cookies from "js-cookie";
+import api from '../api.js';
 
 const PasswordForgot = () => {
     const [email, setEmail] = useState('');
@@ -10,15 +9,7 @@ const PasswordForgot = () => {
         e.preventDefault();
 
         try {
-            const csrfToken = Cookies.get("csrftoken");
-            const response = await axios.post(
-                'https://houseofharmonymusic-api.onrender.com/request_password_reset/', 
-                { email },
-                {
-                    headers: { "X-CSRFToken": csrfToken },
-                    withCredentials: true,
-                },
-            );
+            const response = await api.post('/request_password_reset/', { email });
             console.log(response.data)
         } 
         catch (error) {

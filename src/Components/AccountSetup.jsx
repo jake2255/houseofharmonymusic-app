@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { Container, Card, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import './AccountSetup.css';
 import "./Verification.jsx";
-import { Container, Card, Row, Col, Form, Button, Alert } from 'react-bootstrap';
+import api from '../api.js';
 
 function AccountSetup() 
 {
@@ -32,7 +32,7 @@ function AccountSetup()
 
     try{
       // This will now call the VerificationView in the backend to create the verification code
-      const response = await axios.post("https://houseofharmonymusic-api.onrender.com/verification/", registrationData)
+      const response = await api.post("/verification/", registrationData)
       console.log(response.data)
       setMessage("Verification code sent to your email!");
       setError('');
@@ -126,6 +126,7 @@ function AccountSetup()
                 />
               </Form.Group>
 
+              {/* phone not being used, removed for now
               <Form.Group controlId="formPhone" className="mb-3">
                 <Form.Label>Phone Number:</Form.Label>
                 <Form.Control
@@ -135,7 +136,7 @@ function AccountSetup()
                   placeholder="Enter your phone number"
                   required
                 />
-              </Form.Group>
+              </Form.Group> */}
 
               <Form.Group controlId="formUsername" className="mb-3">
                 <Form.Label>Username:</Form.Label>

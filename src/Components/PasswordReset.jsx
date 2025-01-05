@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Form, Button, Container, Card, Row, Col } from 'react-bootstrap';
-import axios from 'axios';
-import Cookies from "js-cookie";
+import api from '../api.js';
 
 const PasswordReset = () => {
     const { userId, token } = useParams();
@@ -20,16 +19,7 @@ const PasswordReset = () => {
         }
 
         try {
-            const csrfToken = Cookies.get("csrftoken");
-            const response = await axios.post(
-                `https://houseofharmonymusic-api.onrender.com/password_reset/${userId}/${token}/`,
-                { password },
-                {
-                    headers: { "X-CSRFToken": csrfToken },
-                    withCredentials: true,
-                },
-
-            );
+            const response = await api.post(`/password_reset/${userId}/${token}/`, { password });
             console.log(response.data)
             navigate('/login');
         } 

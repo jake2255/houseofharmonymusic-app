@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col, Alert, Card } from "react-bootstrap";
-import axios from 'axios';
-import Cookies from "js-cookie";
+import api from '../api.js';
 
 function MassMessaging() {
     const [subject, setSubject] = useState('');
@@ -23,24 +22,17 @@ function MassMessaging() {
         e.preventDefault();
 
         try {
-            const csrfToken = Cookies.get("csrftoken");
             const formData = { subject, body };
-            const response = await axios.post(
-                "https://houseofharmonymusic-api.onrender.com/mass_email_contact/",
-                formData,
-                {
-                    headers: { "X-CSRFToken": csrfToken },
-                    withCredentials: true,
-                }
-            );
+            const response = await api.post("/mass_email_contact/", formData);
+            console.log(response.data);
 
             setMessage("Successfully sent email to all accounts!");
             setError('');
             setSubject('');
             setBody('');
         } 
-        catch (err) {
-            console.error(err);
+        catch (error) {
+            console.error(error);
             setError("Email failed, please try again.");
             setMessage('');
         }

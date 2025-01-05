@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { useParams, Link } from 'react-router-dom';
 import './Lesson.css';
+import api from '../api.js';
 
 const Lesson = () => {
     const { lessonId, courseId } = useParams();
@@ -11,12 +11,12 @@ const Lesson = () => {
     useEffect(() => {
         const getLesson = async () => {
             try {
-                const response = await axios.get(`https://houseofharmonymusic-api.onrender.com/lesson/${lessonId}/`, { withCredentials: true });
+                const response = await api.get(`/lesson/${lessonId}/`);
                 console.log(response.data);
                 setLessonData(response.data);
             } 
             catch (error) {
-                console.error("Error fetching lesson", error);
+                console.error(error);
             }
         };
 

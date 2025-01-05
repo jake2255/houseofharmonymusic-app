@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Form, Button, Container, Card, Row, Col } from 'react-bootstrap';
-import axios from 'axios';
-import Cookies from "js-cookie";
+import api from '../api.js';
 
 const UsernameReset = () => {
     const { userId, token } = useParams();
@@ -13,16 +12,7 @@ const UsernameReset = () => {
         e.preventDefault();
 
         try {
-            const csrfToken = Cookies.get("csrftoken");
-            const response = await axios.post(
-                `https://houseofharmonymusic-api.onrender.com/username_reset/${userId}/${token}/`,
-                { username },
-                {
-                    headers: { "X-CSRFToken": csrfToken },
-                    withCredentials: true,
-                },
-
-            );
+            const response = await api.post(`/username_reset/${userId}/${token}/`, { username });
             console.log(response.data)
             navigate('/login');
         } 
@@ -33,7 +23,7 @@ const UsernameReset = () => {
 
     return (
         <Container className="mt-5">
-            <Card className="p-4" style={{ borderWidth: '3px', borderColor: 'orange', borderStyle: 'solid'}}>
+            <Card className="p-4" style={{ borderWidth: '3px', borderColor: 'orange' , borderStyle: 'solid'}}>
                 <Row className="justify-content-center">
                     <Col>
                         <h3 className="mb-4">Set a New Username</h3>
