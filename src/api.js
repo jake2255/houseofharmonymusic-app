@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// Function to retrieve the CSRF token from cookies
+// Function to retrieve csrf token
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -16,26 +16,25 @@ function getCookie(name) {
     return cookieValue;
 }
 
-// Create Axios instance
+
+// Create an Axios instance
 const api = axios.create({
     baseURL: 'https://houseofharmonymusic-api.onrender.com',
-    withCredentials: true,  // Include credentials like cookies with requests
+    headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': getCookie('csrftoken'),
+    },
+    withCredentials: true,
 });
 
-// Make a request with manual CSRF token
-export const makeRequest = async (url, method, data = {}) => {
+
+// Add CSRF token interceptor
+api.interceptors.request.use((config) => {
     const csrfToken = getCookie('csrftoken');
-    try {
-        const response = await api({
-            url,
-            method,
-            data,
-            headers: {
-                'X-CSRFToken': csrfToken,  // Include CSRF token in the header
-            },
-        });
-        return response.data;
-    } catch (error) {
-        console.error('Error with Axios request:', error);
+    if (csrfToken) {
+        config.headers['X-CSRFToken'] = csrfToken;
     }
-};
+    return config;
+});
+
+export default api;
