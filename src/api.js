@@ -22,9 +22,9 @@ function getCookie(name) {
 const api = axios.create({
     baseURL: 'https://houseofharmonymusic-api.onrender.com',
     withCredentials: true,
-    withXSRFToken: true,
-    xsrfCookieName: "csrftoken",
-    xsrfHeaderName: "X-CSRFToken",
+    headers: {
+        'X-CSRFToken': getCookie('csrftoken')
+    }
 });
 
 
