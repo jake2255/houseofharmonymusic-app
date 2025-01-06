@@ -21,7 +21,11 @@ function getCookie(name) {
 // Create an Axios instance
 const api = axios.create({
     baseURL: 'https://houseofharmonymusic-api.onrender.com',
-    withCredentials: true, // Ensures cookies are included
+    headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': getCookie('csrftoken'),
+    },
+    withCredentials: true,
 });
 
 
