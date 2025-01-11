@@ -55,10 +55,10 @@ const AccountCourse = () => {
     }
 
     return (
-        <Container className="py-5">
+        <Container className="py-5" fluid>
             <Row className="mb-4">
                 <Col>
-                    <Card className="p-4 shadow-sm " style={{ borderWidth: '3px', borderColor: 'orange', borderStyle: 'solid', width: '1200px'}}>
+                    <Card className="p-4 shadow-sm " style={{ borderWidth: '3px', borderColor: 'orange', borderStyle: 'solid', maxWidth: '95%'}}>
                         <Row className="mb-3 align-items-center">
                             <Col className="d-flex justify-content-start">
                                 <Link to={'/account'}>
