@@ -2,6 +2,7 @@ import axios from 'axios';
 
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"
+axios.defaults.withXSRFToken = true
 
 // Function to retrieve csrf token
 function getCookie(name) {
