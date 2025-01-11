@@ -3,6 +3,7 @@ import axios from 'axios';
 axios.defaults.xsrfCookieName = 'csrftoken'
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"
 axios.defaults.withXSRFToken = true
+axios.defaults.withCredentials = true
 
 // Function to retrieve csrf token
 function getCookie(name) {
@@ -23,7 +24,6 @@ function getCookie(name) {
 // Create an Axios instance
 const api = axios.create({
     baseURL: 'https://houseofharmonymusic-api.onrender.com',
-    withCredentials: true,
 });
 
 
