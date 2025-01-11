@@ -16,25 +16,39 @@ function getCookie(name) {
     return cookieValue;
 }
 
-
-// Create an Axios instance
 const api = axios.create({
     baseURL: 'https://houseofharmonymusic-api.onrender.com',
-    headers: {
-        'Content-Type': 'application/json',
-        'X-CSRFToken': getCookie('csrftoken'),
-    },
     withCredentials: true,
+    xsrfCookieName: "csrftoken",
+    xsrfHeaderName: "X-CSRFToken",
+    headers: {
+        'X-CSRFToken': getCookie("csrftoken")
+    }
 });
+
+
+// Create an Axios instance
+// const api = axios.create({
+//     baseURL: 'https://houseofharmonymusic-api.onrender.com',
+//     headers: {
+//         'Content-Type': 'application/json',
+//         'X-CSRFToken': getCookie('csrftoken'),
+//     },
+//     withCredentials: true,
+// });
 
 
 // Add CSRF token interceptor
-api.interceptors.request.use((config) => {
-    const csrfToken = getCookie('csrftoken');
-    if (csrfToken) {
-        config.headers['X-CSRFToken'] = csrfToken;
-    }
-    return config;
-});
+// api.interceptors.request.use((config) => {
+//     const csrfToken = getCookie('csrftoken');
+//     if (csrfToken) {
+//         config.headers['X-CSRFToken'] = csrfToken;
+//         console.log('CSRF Token Added to Headers:', csrfToken); // Debug log
+//     }
+//     return config;
+// }, (error) => {
+//     return Promise.reject(error);
+// });
+
 
 export default api;
