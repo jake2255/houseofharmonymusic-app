@@ -48,6 +48,21 @@ const ServicesCourse = () => {
         }
     }, []);
 
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
     const handlePayment = async () => {
         try {
             const authResponse = await api.get('/check_auth/');
@@ -56,13 +71,33 @@ const ServicesCourse = () => {
                 return;
             }
 
-            const response = await api.post("/create_checkout_session/", {course_id: courseId});
+            //const response = await api.post("/create_checkout_session/", {course_id: courseId});
+            const response = await fetch(
+                "https://houseofharmonymusic-api.onrender.com/create_checkout_session/",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": getCookie("csrftoken")
 
-            if (response.data.checkout_url) {
+                    },
+                    credentials: "include",
+                    body: JSON.stringify({ course_id: courseId }),
+
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            if (data.checkout_url) {
                 // Redirect user to Stripe Checkout
-                window.location.href = response.data.checkout_url;
+                window.location.href = data.checkout_url;
             } 
-            else if (response.data.redirect_url) {
+            else if (data.redirect_url) {
                 window.location.href = response.data.redirect_url;
             }
             else {
