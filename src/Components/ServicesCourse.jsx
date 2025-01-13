@@ -3,7 +3,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card, Accordion, Button, Alert } from 'react-bootstrap';
 import './ServicesCourse.css';
 import api from '../api.js';
-import Cookies from 'js-cookie';
 
 const ServicesCourse = () => {
     const { courseId } = useParams();
@@ -64,25 +63,26 @@ const ServicesCourse = () => {
     //     return cookieValue;
     // }
 
-    function getCookie(name) {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            // Match the cookie name
-            if (cookie.startsWith(`${name}=`)) {
-                return decodeURIComponent(cookie.substring(name.length + 1));
+    const getCookie = (name) => {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
             }
         }
-        return null;
-    }
+        return cookieValue;
+      };
     
 
     const handlePayment = async () => {
         const csrfToken = getCookie('csrftoken');
-        console.log('Manual CSRF Token:', csrfToken);
-
-        const testCsrf = Cookies.get('csrftoken');
-        console.log('Library CSRF Token:', testCsrf);
+        console.log('CSRF Token:', csrfToken);
+        console.log('Document cookies: ', document.cookie);
         
         try {
             const authResponse = await api.get('/check_auth/');
