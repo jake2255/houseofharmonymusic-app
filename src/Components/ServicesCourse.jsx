@@ -9,6 +9,7 @@ const ServicesCourse = () => {
     const [courseData, setCourseData] = useState(null);
     const [message, setMessage] = useState("");
     const [showAlert, setShowAlert] = useState(false);
+    const [csrftoken, setCsrfToken] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -80,8 +81,9 @@ const ServicesCourse = () => {
     
 
     const handlePayment = async () => {
-        const csrfToken = getCookie('csrftoken');
-        console.log('CSRF Token:', csrfToken);
+        //const csrftoken = getCookie('csrftoken');
+        setCsrfToken(getCookie('csrftoken'));
+        console.log('CSRF Token:', csrftoken);
         console.log('Document cookies: ', document.cookie);
         
         try {
@@ -98,7 +100,7 @@ const ServicesCourse = () => {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
-                        "X-CSRFToken": csrfToken,
+                        "X-CSRFToken": csrftoken,
                     },
                     credentials: "include",
                     body: JSON.stringify({ course_id: courseId }),
