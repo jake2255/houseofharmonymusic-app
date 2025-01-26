@@ -24,7 +24,7 @@ axios.defaults.headers.common['X-CSRFToken'] = getCookie('csrftoken');
 
 // Create an Axios instance
 const api = axios.create({
-    baseURL: 'https://houseofharmonymusic-api.onrender.com',
+    baseURL: 'https://api.houseofharmonymusic.net',
 });
 
 export default api;
