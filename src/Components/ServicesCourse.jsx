@@ -93,20 +93,20 @@ const ServicesCourse = () => {
                 return;
             }
 
-            //const response = await api.post("/create_checkout_session/", {course_id: courseId});
-            const response = await fetch(
-                "https://houseofharmonymusic-api.onrender.com/create_checkout_session/",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRFToken": csrftoken,
-                    },
-                    credentials: "include",
-                    body: JSON.stringify({ course_id: courseId }),
+            const response = await api.post("/create_checkout_session/", {course_id: courseId});
+            // const response = await fetch(
+            //     "https://api.houseofharmonymusic.net/create_checkout_session/",
+            //     {
+            //         method: "POST",
+            //         headers: {
+            //             "Content-Type": "application/json",
+            //             "X-CSRFToken": csrftoken,
+            //         },
+            //         credentials: "include",
+            //         body: JSON.stringify({ course_id: courseId }),
 
-                }
-            );
+            //     }
+            // );
 
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
