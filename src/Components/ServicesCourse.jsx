@@ -93,7 +93,7 @@ const ServicesCourse = () => {
                 return;
             }
 
-            const response2 = await api.post("/create_checkout_session/", {course_id: courseId});
+            //const response2 = await api.post("/create_checkout_session/", {course_id: courseId});
             const response = await fetch(
                 "https://api.houseofharmonymusic.net/create_checkout_session/",
                 {
