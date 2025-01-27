@@ -58,13 +58,13 @@ function AccountLogin()
                 {
                     credentials: 'include',
                     method: 'POST',
-                    mode: 'same-origin',
+                    mode: 'cors', // same-origin maybe?
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
                         'X-CSRFToken': getCookie('csrftoken'),
                     },
-                    body: {},
+                    body: JSON.stringify(loginData)
 
                 }
             );
