@@ -68,45 +68,40 @@ function AccountLogin()
 
                 }
             );
-            console.log(response.data);
-            setMessage("Successful login!");
-            setError('');
             
-            // Extracts the courses array from the user data object being stored in the localStorage
-            const { courses, ...accInfoWithoutCourses } = response.data.account_info;
-            const objectWithoutCourses = {
-              ...response.data,
-              account_info: accInfoWithoutCourses
-            };
-
-            localStorage.setItem("userData", JSON.stringify(objectWithoutCourses));
-            localStorage.setItem("isAuthenticated", "true");
-            localStorage.setItem("isAuthorized", response.data.user_auth)
-            
-            setTimeout(() => {
-                navigate('/account', { state: response.data });
-            }, 1000);
-        }
-        catch (error) {
-            console.error(error.response ? error.response.data : error.message)
-            if (error.response && error.response.data) {
-                if (error.response.data.non_field_errors) {
-                    setError("Invalid credentials.");
-                } 
-                else {
-                    setError("An error has occurred. Please try again.");
-                }
-            } 
-            else {
-                setError("Unable to connect to the server. Please check your connection.");
+            if (response.ok) {
+                const responseData = await response.json();
+                console.log("Response Data:", responseData);
+                
+                // Handle successful login
+                setMessage("Successful login!");
+                setError('');
+                
+                // Store user data in localStorage
+                const { courses, ...accInfoWithoutCourses } = responseData.account_info;
+                const objectWithoutCourses = {
+                    ...responseData,
+                    account_info: accInfoWithoutCourses,
+                };
+        
+                localStorage.setItem("userData", JSON.stringify(objectWithoutCourses));
+                localStorage.setItem("isAuthenticated", "true");
+                localStorage.setItem("isAuthorized", responseData.user_auth);
+        
+                setTimeout(() => {
+                    navigate('/account', { state: responseData });
+                }, 1000);
+            } else {
+                const errorData = await response.json();
+                console.error("Error Response Data:", errorData);
+                setError(errorData.non_field_errors || "Invalid login credentials.");
+                setMessage('');
             }
+        } catch (error) {
+            console.error("Connection Error:", error.message);
+            setError("Unable to connect to the server. Please check your connection.");
             setMessage('');
         }
-      
-        setTimeout(() => {
-            setError('');
-            setMessage('');
-        }, 3000);
     }
 
     return ( 
