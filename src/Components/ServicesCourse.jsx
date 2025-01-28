@@ -80,11 +80,8 @@ const ServicesCourse = () => {
       };
     
 
-    const handlePayment = async () => {
-        //const csrftoken = getCookie('csrftoken');
-        setCsrfToken(getCookie('csrftoken'));
-        console.log('CSRF Token:', csrftoken);
-        console.log('Document cookies: ', document.cookie);
+    const handlePayment = async (e) => {
+        e.preventDefault();
         
         try {
             const authResponse = await api.get('/check_auth/');
@@ -94,25 +91,6 @@ const ServicesCourse = () => {
             }
 
             const response = await api.post("/create_checkout_session/", {course_id: courseId});
-            // const response = await fetch(
-            //     "https://api.houseofharmonymusic.net/create_checkout_session/",
-            //     {
-            //         method: "POST",
-            //         headers: {
-            //             "Content-Type": "application/json",
-            //             "X-CSRFToken": csrftoken,
-            //         },
-            //         credentials: "include",
-            //         body: JSON.stringify({ course_id: courseId }),
-
-            //     }
-            // );
-
-            // if (!response.ok) {
-            //     throw new Error(`HTTP error! Status: ${response.status}`);
-            // }
-
-            //const data = await response.json();
             console.log(response.data);
 
             if (data.checkout_url) {
