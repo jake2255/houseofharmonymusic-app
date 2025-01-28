@@ -126,7 +126,6 @@ function AccountSetup()
                 />
               </Form.Group>
 
-              {/* phone not being used, removed for now
               <Form.Group controlId="formPhone" className="mb-3">
                 <Form.Label>Phone Number:</Form.Label>
                 <Form.Control
@@ -136,7 +135,7 @@ function AccountSetup()
                   placeholder="Enter your phone number"
                   required
                 />
-              </Form.Group> */}
+              </Form.Group>
 
               <Form.Group controlId="formUsername" className="mb-3">
                 <Form.Label>Username:</Form.Label>
