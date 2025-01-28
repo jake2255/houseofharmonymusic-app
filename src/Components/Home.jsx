@@ -22,7 +22,7 @@ export default function Home() {
                                 He currently teaches pop, rock, and music fundamentals, helping students unlock their ideal 
                                 sound. In 2023, House of Harmony Music was founded to offer personalized music instruction 
                                 while balancing his studies.
-                                Learn more about Brandon Shadman here: <a href="http://localhost:5173/about">[About Page]</a>
+                                Learn more about Brandon Shadman here: <a href="/about">[About Page]</a>
                             </p>
                             <br></br>
                             <h2>Our Courses</h2>
@@ -31,13 +31,13 @@ export default function Home() {
                                 Whether you aspire to strum the perfect chord, play enchanting melodies, or find your unique voice, our 
                                 courses are crafted to guide you every step of the way. Join us and transform your musical dreams into 
                                 reality with expert instruction and interactive lessons designed for all skill levels.
-                                See all courses here: <a href="http://localhost:5173/course-list">[Courses Page]</a>
+                                See all courses here: <a href="/course-list">[Courses Page]</a>
                             </p>
                             <br></br>
                             <h2>Schedule an Appointment</h2>
                             <p>
                                 You can make your appointment for a music lesson with Brandon Shadman. Simply reach out via the 
-                                provided contact information here: <a href="http://localhost:5173/contact">[Contact Page]</a>. Feel free to ask any 
+                                provided contact information here: <a href="/contact">[Contact Page]</a>. Feel free to ask any 
                                 questions about lesson structure or the instructor's approach before booking to ensure a great 
                                 fit for your musical goals.
                             </p>
@@ -49,7 +49,7 @@ export default function Home() {
                                 music lessons based on your interests and skill level. You’ll also get exclusive updates about new 
                                 courses, events, and special offers delivered directly to your inbox. This way, you can stay 
                                 informed and ensure your lessons align with your musical goals.
-                                Register here: <a href="http://localhost:5173/register">[Register Page]</a>
+                                Register here: <a href="/register">[Register Page]</a>
                             </p>
                         </div>                        
                     </Col>
