@@ -93,6 +93,8 @@ const ServicesCourse = () => {
             const response = await api.post("/create_checkout_session/", {course_id: courseId});
             console.log(response.data);
 
+            const data = response.data;
+
             if (data.checkout_url) {
                 // Redirect user to Stripe Checkout
                 window.location.href = data.checkout_url;
