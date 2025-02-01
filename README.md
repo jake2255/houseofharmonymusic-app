@@ -1,8 +1,12 @@
-# React + Vite
+# House of Harmony Music - Frontend
+This repository contains the frontend code for the House of Harmony Music website, built with React.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Intoduction
+House of Harmony Music is a service that helps aspiring musicians to discover and purchase online music courses. This project focuses on creating a seamless and enjoyable user experience while the user learns how to play music.
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Features
+- Responsive design
+- User-friendly interface
+- Course catalog
+- Video Streaming
+  
